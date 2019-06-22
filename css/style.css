@@ -1,0 +1,7 @@
+/* line 2, sass/style.scss */ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* line 8, sass/style.scss */ .container { display: flex; }
+
+/* line 12, sass/style.scss */ form label { padding-left: 2rem; margin-left: 2rem; }
+
+/* line 17, sass/style.scss */ .user-list { position: absolute; top: 100%; left: 0; transform: translate(19%, 0%); }

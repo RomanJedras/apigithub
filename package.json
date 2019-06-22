@@ -1,0 +1,45 @@
+{
+  "name": "apigithub",
+  "version": "1.0.0",
+  "description": "\"# api github\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init-project": "npm install && npm-run-all init:*",
+    "init:dirs": "mkdirp sass css vendor images js",
+    "init:files": "touch README.md index.html sass/style.scss js/script.js",
+    "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+    "init-babel": "babel js/script.js --watch --out-file js/build.js",
+    "browsersync": "browser-sync start --server  --files css/*.css *.html",
+    "scss": "node-sass  --output-style compact  -watch  -o css sass",
+    "start": "http-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RomanJedras/apigithub"
+  },
+  "bugs": {
+    "url": "https://github.com/RomanJedras/apigithub/issues"
+  },
+  "homepage": "https://github.com/RomanJedras/apigithub#readme",
+  "devDependencies": {
+    "all": "0.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-latest": "^6.24.1",
+    "http-server": "^0.11.1",
+    "stylelint-prettier": "^1.0.6",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-standalone": "^6.26.0",
+    "browser": "^0.2.6",
+    "browserlist": "^1.0.1",
+    "browserslist": "^4.5.5",
+    "normalize-css": "^2.3.1",
+    "prettier": "^1.18.2",
+    "stylelint": "^10.0.1"
+  }
+}
