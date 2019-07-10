@@ -50,8 +50,7 @@ class App extends React.Component {
     if (this.state.erorrs) {
       <FetchErorr/>
     } else if(this.state.loading) {
-      console.log(this.state);
-      <p>12</p>
+      <p>To jest loading</p>
     }
     
    

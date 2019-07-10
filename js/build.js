@@ -69,11 +69,10 @@ var App = function (_React$Component) {
       if (this.state.erorrs) {
         React.createElement(FetchErorr, null);
       } else if (this.state.loading) {
-        console.log(this.state);
         React.createElement(
           'p',
           null,
-          '12'
+          'To jest loading'
         );
       }
 
@@ -150,8 +149,6 @@ var User = function (_React$Component3) {
   _createClass(User, [{
     key: 'render',
     value: function render() {
-
-      console.log(this.state);
       return React.createElement(
         'div',
         { className: 'col-xs-12 col-md-4 mb-3 mt-2 justify-content-between' },
