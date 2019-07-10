@@ -1,11 +1,26 @@
 
+
+
+const FetchErorr = () => {
+  return (
+    <div className={'async-status-wrapper'}>
+      <p>Wystapił bład, spróbuj ponownie</p>
+    </div>
+  );
+};
+
+
+
+
+
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       searchText: '',
       users: [],
-      erorrs: []
+      erorrs: null,
+      loading: true
     };
   }
   
@@ -13,18 +28,36 @@ class App extends React.Component {
     this.setState({searchText: event.target.value});
   }
   
+  
   onSubmit(event) {
     event.preventDefault();
     const {searchText} = this.state;
+  
     const url = `https://api.github.com/search/users?q=${searchText}`;
-    fetch(url)
-    .then(response => response.json())
-    .then(responseJson => this.setState({users: responseJson.items}))
-    //This place we Add error on list errors to check lists of error in feature
-    .catch(error => { this.setState({errors: error.message.json()}) });
+    
+      fetch(url)
+      .then(response => response.json())
+      .then(responseJson => this.setState({ users: responseJson.items, loading: false }))
+      .catch(error => {
+        this.setState({ error })
+      })
+    
   }
   
+  
+  
   render() {
+    if (this.state.erorrs) {
+      <FetchErorr/>
+    } else if(this.state.loading) {
+      console.log(this.state);
+      <p>12</p>
+    }
+    
+   
+    
+    
+    
     return (
       <div className={'mt-2 mb-3 d-flex justify-content-center'}>
         <form onSubmit={event => this.onSubmit(event)}>
@@ -37,6 +70,8 @@ class App extends React.Component {
         </form>
         <UsersList users={this.state.users}/>
       </div>
+      
+      
     );
   }
 }
@@ -51,7 +86,7 @@ class UsersList extends React.Component {
   render() {
     return (
       <div className={'row user-list'}>
-        { (!this.users)? '' : this.users}
+        { (!this.users)? <FetchErorr/> : this.users}
       </div>
     );
   }
@@ -59,6 +94,8 @@ class UsersList extends React.Component {
 
 class User extends React.Component {
   render() {
+    
+    console.log(this.state);
     return (
       <div className={'col-xs-12 col-md-4 mb-3 mt-2 justify-content-between'}>
         <img src={this.props.user.avatar_url} style={{maxWidth: '100px'}}/>

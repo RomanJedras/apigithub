@@ -9,3 +9,10 @@
 /* line 22, sass/style.scss */ .user-list a { display: flex; padding: 20px 0; }
 
 /* line 28, sass/style.scss */ .headig { padding: 20px 0; margin: 0 auto; display: inline-block; color: #FFF; background-color: black; }
+
+.async-status-wrapper {
+	display: block;
+	left: 220px;
+	position: relative;
+	color: red;
+}

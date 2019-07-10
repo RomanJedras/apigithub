@@ -8,6 +8,18 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var FetchErorr = function FetchErorr() {
+  return React.createElement(
+    'div',
+    { className: 'async-status-wrapper' },
+    React.createElement(
+      'p',
+      null,
+      'Wystapi\u0142 b\u0142ad, spr\xF3buj ponownie'
+    )
+  );
+};
+
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -19,7 +31,8 @@ var App = function (_React$Component) {
     _this.state = {
       searchText: '',
       users: [],
-      erorrs: []
+      erorrs: null,
+      loading: true
     };
     return _this;
   }
@@ -37,21 +50,32 @@ var App = function (_React$Component) {
       event.preventDefault();
       var searchText = this.state.searchText;
 
+
       var url = 'https://api.github.com/search/users?q=' + searchText;
+
       fetch(url).then(function (response) {
         return response.json();
       }).then(function (responseJson) {
-        return _this2.setState({ users: responseJson.items });
-      })
-      //This place we Add error on list errors to check lists of error in feature
-      .catch(function (error) {
-        _this2.setState({ errors: error.message.json() });
+        return _this2.setState({ users: responseJson.items, loading: false });
+      }).catch(function (error) {
+        _this2.setState({ error: error });
       });
     }
   }, {
     key: 'render',
     value: function render() {
       var _this3 = this;
+
+      if (this.state.erorrs) {
+        React.createElement(FetchErorr, null);
+      } else if (this.state.loading) {
+        console.log(this.state);
+        React.createElement(
+          'p',
+          null,
+          '12'
+        );
+      }
 
       return React.createElement(
         'div',
@@ -97,7 +121,7 @@ var UsersList = function (_React$Component2) {
       return React.createElement(
         'div',
         { className: 'row user-list' },
-        !this.users ? '' : this.users
+        !this.users ? React.createElement(FetchErorr, null) : this.users
       );
     }
   }, {
@@ -126,6 +150,8 @@ var User = function (_React$Component3) {
   _createClass(User, [{
     key: 'render',
     value: function render() {
+
+      console.log(this.state);
       return React.createElement(
         'div',
         { className: 'col-xs-12 col-md-4 mb-3 mt-2 justify-content-between' },
