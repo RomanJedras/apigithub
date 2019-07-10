@@ -94,8 +94,6 @@ class UsersList extends React.Component {
 
 class User extends React.Component {
   render() {
-    
-    console.log(this.state);
     return (
       <div className={'col-xs-12 col-md-4 mb-3 mt-2 justify-content-between'}>
         <img src={this.props.user.avatar_url} style={{maxWidth: '100px'}}/>
