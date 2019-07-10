@@ -18,7 +18,8 @@ var App = function (_React$Component) {
 
     _this.state = {
       searchText: '',
-      users: []
+      users: [],
+      erorrs: []
     };
     return _this;
   }
@@ -41,8 +42,11 @@ var App = function (_React$Component) {
         return response.json();
       }).then(function (responseJson) {
         return _this2.setState({ users: responseJson.items });
+      })
+      //This place we Add error on list errors to check lists of error in feature
+      .catch(function (error) {
+        _this2.setState({ errors: error.message.json() });
       });
-      console.log(this.state.users);
     }
   }, {
     key: 'render',
@@ -93,15 +97,17 @@ var UsersList = function (_React$Component2) {
       return React.createElement(
         'div',
         { className: 'row user-list' },
-        this.users
+        !this.users ? '' : this.users
       );
     }
   }, {
     key: 'users',
     get: function get() {
-      return this.props.users.map(function (user) {
-        return React.createElement(User, { key: user.id, user: user });
-      });
+      if (this.props.users) {
+        return this.props.users.map(function (user) {
+          return React.createElement(User, { key: user.id, user: user });
+        });
+      }
     }
   }]);
 

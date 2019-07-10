@@ -4,7 +4,8 @@ class App extends React.Component {
     super();
     this.state = {
       searchText: '',
-      users: []
+      users: [],
+      erorrs: []
     };
   }
   
@@ -18,8 +19,9 @@ class App extends React.Component {
     const url = `https://api.github.com/search/users?q=${searchText}`;
     fetch(url)
     .then(response => response.json())
-    .then(responseJson => this.setState({users: responseJson.items}));
-    console.log(this.state.users);
+    .then(responseJson => this.setState({users: responseJson.items}))
+    //This place we Add error on list errors to check lists of error in feature
+    .catch(error => { this.setState({errors: error.message.json()}) });
   }
   
   render() {
@@ -41,13 +43,15 @@ class App extends React.Component {
 
 class UsersList extends React.Component {
   get users() {
-    return this.props.users.map(user => <User key={user.id} user={user}/>);
+    if ( this.props.users) {
+       return this.props.users.map(user => <User key={user.id} user={user}/>);
+     }
   }
   
   render() {
     return (
       <div className={'row user-list'}>
-        {this.users}
+        { (!this.users)? '' : this.users}
       </div>
     );
   }
